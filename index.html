@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prem Lohar | Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc;
+            overflow-x: hidden;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .skill-icon {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.2));
+            will-change: transform;
+        }
+        .skill-icon:hover {
+            transform: scale(1.15) !important;
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.6));
+        }
+        .gradient-text {
+            background: linear-gradient(-45deg, #7928CA, #FF0080, #38BDF8, #2DD4BF);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 5s ease infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Custom infinite bounce for skills */
+        .bounce-infinite {
+            animation: bounceCustom 3s infinite ease-in-out;
+        }
+        @keyframes bounceCustom {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        /* Typing effect cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="flex flex-col min-h-screen selection:bg-pink-500 selection:text-white relative">
+
+    <!-- Background interactive glow -->
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+        <div class="absolute top-10 left-10 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
+        <div class="absolute top-1/4 right-10 w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[120px] animation-delay-2000"></div>
+        <div class="absolute bottom-20 left-1/3 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[120px] animation-delay-4000 animate-pulse"></div>
+    </div>
+
+    <!-- Header / Name Section -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative z-10">
+        <div class="header-content">
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-4 pb-2 gradient-text drop-shadow-2xl">Prem Lohar</h1>
+            <p class="text-xl md:text-2xl text-slate-400 font-mono" style="font-family: 'Fira Code', monospace;">
+                &gt; <span id="typing-text"></span><span class="cursor-blink">_</span>
+            </p>
+        </div>
+        
+        <div class="absolute bottom-10 animate-bounce cursor-pointer opacity-70 hover:opacity-100 transition-opacity" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})">
+            <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-24 px-4 max-w-4xl mx-auto text-center about-section z-10" id="about">
+        <h2 class="text-3xl font-bold mb-10 text-slate-200 tracking-wider">About Me</h2>
+        <div class="bg-slate-800/40 p-10 rounded-3xl border border-slate-700/50 backdrop-blur-md shadow-2xl" id="about-card">
+            <p class="text-xl text-slate-300 leading-relaxed mb-6 font-medium">
+                Hi, I'm Prem! I specialize in building <span class="text-sky-400 font-bold drop-shadow-md">responsive</span>, <span class="text-pink-400 font-bold drop-shadow-md">animated</span>, and robust web applications.
+            </p>
+            <p class="text-lg text-slate-400 leading-relaxed">
+                I love bringing ideas to life through elegant code and dynamic interfaces. Constantly learning and exploring the depths of modern web technologies to craft extraordinary user experiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24 px-4 max-w-6xl mx-auto z-10 w-full" id="skills">
+        <h2 class="text-3xl font-bold mb-16 text-center text-slate-200 tracking-wider">Technologies & Tools</h2>
+        <div class="flex flex-wrap text-center justify-center gap-x-10 gap-y-12" id="skills-container">
+            <!-- Dynamically populated by JS -->
+        </div>
+    </section>
+
+    <!-- Links Section -->
+    <section class="py-20 px-4 z-10" id="connect">
+        <h2 class="text-3xl font-bold mb-12 text-center text-slate-200 tracking-wider">Let's Connect</h2>
+        <div class="flex justify-center flex-wrap gap-10 links-container">
+            <a href="https://www.linkedin.com/in/prem-lohar1/" target="_blank" class="flex flex-col items-center gap-3 group">
+                <div class="w-20 h-20 bg-slate-800/80 rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-sky-500 group-hover:bg-slate-800 transition-all duration-300 shadow-lg group-hover:shadow-sky-500/20 group-hover:-translate-y-2">
+                    <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" class="w-12 h-12">
+                </div>
+                <span class="text-base font-semibold text-slate-400 group-hover:text-sky-400 transition-colors">LinkedIn</span>
+            </a>
+            
+            <a href="https://github.com/PremLohar1" target="_blank" class="flex flex-col items-center gap-3 group">
+                <div class="w-20 h-20 bg-slate-800/80 rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-white group-hover:bg-slate-800 transition-all duration-300 shadow-lg group-hover:shadow-white/20 group-hover:-translate-y-2">
+                    <img src="https://skillicons.dev/icons?i=github" alt="GitHub" class="w-12 h-12">
+                </div>
+                <span class="text-base font-semibold text-slate-400 group-hover:text-white transition-colors">GitHub</span>
+            </a>
+            
+            <a href="https://www.instagram.com/prem._.lohar/" target="_blank" class="flex flex-col items-center gap-3 group">
+                <div class="w-20 h-20 bg-slate-800/80 rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-pink-500 group-hover:bg-slate-800 transition-all duration-300 shadow-lg group-hover:shadow-pink-500/20 group-hover:-translate-y-2">
+                    <img src="https://skillicons.dev/icons?i=instagram" alt="Instagram" class="w-12 h-12">
+                </div>
+                <span class="text-base font-semibold text-slate-400 group-hover:text-pink-400 transition-colors">Instagram</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-10 border-t border-slate-800/60 bg-slate-900/50 text-center text-slate-500 font-mono text-sm relative z-10 backdrop-blur-sm">
+        <p class="hover:text-pink-400 transition-colors duration-300">© 2026 Prem Lohar | Built with Code & Creativity</p>
+    </footer>
+
+    <script>
+        // Skills Implementation
+        const skillsConfig = [
+            { id: 'html', label: 'HTML', url: 'html' },
+            { id: 'css', label: 'CSS', url: 'css' },
+            { id: 'js', label: 'JavaScript', url: 'js' },
+            { id: 'nodejs', label: 'Node.js', url: 'nodejs' },
+            { id: 'mongodb', label: 'MongoDB', url: 'mongodb' },
+            { id: 'react', label: 'React', url: 'react' },
+            { id: 'express', label: 'Express.js', url: 'express' },
+            { id: 'php', label: 'PHP', url: 'php' },
+            { id: 'mysql', label: 'MySQL', url: 'mysql' },
+            { id: 'cpp', label: 'C++', url: 'cpp' },
+            { id: 'tailwind', label: 'TailwindCSS', url: 'tailwind' }
+        ];
+
+        const container = document.getElementById('skills-container');
+
+        // Create standard skill icons
+        skillsConfig.forEach((skill, index) => {
+            const delay = (index * 0.1) + 's';
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex flex-col items-center gap-3 skill-icon bounce-infinite';
+            wrapper.style.animationDelay = delay;
+
+            const img = document.createElement('img');
+            img.src = `https://skillicons.dev/icons?i=${skill.url}`;
+            img.alt = skill.label;
+            img.className = 'w-16 h-16 md:w-20 md:h-20 drop-shadow-xl';
+            
+            const label = document.createElement('span');
+            label.className = 'text-xs md:text-sm font-semibold text-slate-400';
+            label.textContent = skill.label;
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(label);
+            container.appendChild(wrapper);
+        });
+
+        // Add GSAP custom logo
+        const gsapWrapper = document.createElement('div');
+        gsapWrapper.className = 'flex flex-col items-center gap-3 skill-icon bounce-infinite';
+        gsapWrapper.style.animationDelay = '1.2s';
+        
+        const gsapDiv = document.createElement('div');
+        gsapDiv.className = 'w-16 h-16 md:w-20 md:h-20 rounded-[18px] bg-[#88CE02] flex items-center justify-center text-slate-900 border-2 border-[#88CE02]/30 shadow-[#88CE02]/20 shadow-xl';
+        gsapDiv.innerHTML = '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>';
+        
+        const gsapLabel = document.createElement('span');
+        gsapLabel.className = 'text-xs md:text-sm font-semibold text-slate-400';
+        gsapLabel.textContent = 'GSAP';
+
+        gsapWrapper.appendChild(gsapDiv);
+        gsapWrapper.appendChild(gsapLabel);
+        container.appendChild(gsapWrapper);
+
+        // --- GSAP ANIMATIONS ---
+
+        // Simple typing effect logic
+        const texts = ["Full Stack Developer", "Creative Tinker", "Tech Enthusiast"];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        
+        function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+            
+            document.getElementById('typing-text').textContent = letter;
+            
+            if (letter.length === currentText.length) {
+                setTimeout(() => {
+                    index = 0;
+                    count++;
+                    type();
+                }, 2000);
+            } else {
+                setTimeout(type, 100);
+            }
+        }
+        // Start typing
+        setTimeout(type, 1000);
+
+        // Header Reveal
+        gsap.from(".header-content", {
+            duration: 1.5,
+            y: 50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+
+        // Continuous subtle rotation for About card
+        gsap.to("#about-card", {
+            y: -15,
+            rotation: 1,
+            duration: 3,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut"
+        });
+        
+    </script>
+</body>
+</html>
